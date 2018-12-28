@@ -33,7 +33,7 @@ dependencies {
 # Effect picture
 
 
-![圆形图片效果图](https://github.com/huangziye/DouYin/blob/master/screenshot/BottomNavigationBar.gif)
+![圆形图片效果图](https://github.com/huangziye/BottomNavigationBar/blob/master/screenshot/BottomNavigationBar.gif)
 
 
 # Usage
@@ -68,7 +68,7 @@ BadgeView(this).bindTargetView(itemView).setBadgeCount(120)
 ```
 
 
-**BadegeView 方法说明
+**BadegeView 方法说明**
 
 | 方法	| 说明 |
 | --- | --- |
@@ -101,6 +101,8 @@ BadgeView(this).bindTargetView(itemView).setBadgeCount(120)
 - [Github](https://github.com/huangziye)
 
 
+<br />
+<br />
 
 [reference](https://github.com/qstumn/BadgeView)
 
