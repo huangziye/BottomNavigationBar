@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BottomNavigationBar</string>
+    <string name="wechat">微信</string>
+    <string name="contact">通讯录</string>
+    <string name="find">发现</string>
+    <string name="me">我</string>
+</resources>

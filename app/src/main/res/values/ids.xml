@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--底部导航id-->
+    <item name="action_wechat" type="id"/>
+    <item name="action_contact" type="id"/>
+    <item name="action_find" type="id"/>
+    <item name="action_me" type="id"/>
+</resources>

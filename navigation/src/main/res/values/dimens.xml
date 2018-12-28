@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--去掉在BottomNavigationView选中时，图标和文字放大的效果-->
+    <!--http://www.jianshu.com/p/7b2d842267ab-->
+    <!--BottomNavigationView 的选中没有选中的字体大小-->
+    <dimen name="design_bottom_navigation_active_text_size">12dp</dimen>
+    <dimen name="design_bottom_navigation_text_size">12dp</dimen>
+
+    <!--BottomNavigationView 只放图标时的设置-->
+    <!--<dimen name="design_bottom_navigation_active_text_size">0dp</dimen>-->
+    <!--<dimen name="design_bottom_navigation_text_size">0dp</dimen>-->
+    <!--<dimen name="design_bottom_navigation_margin">16dp</dimen>-->
+</resources>
