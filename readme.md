@@ -38,6 +38,38 @@ dependencies {
 
 # Usage
 
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+    <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_above="@+id/bottom_navigation"
+            android:overScrollMode="never"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    <View android:layout_width="match_parent"
+          android:layout_height="1px"
+          android:layout_above="@+id/bottom_navigation"
+          android:background="@android:color/darker_gray"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"/>
+
+
+</RelativeLayout>
+```
+
+
 ```Kotlin
 BottomNavigationBar.Companion.Builder().with(this)
     .bottomNavigationView(bottom_navigation)
