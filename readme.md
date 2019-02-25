@@ -33,7 +33,7 @@ dependencies {
 # Effect picture
 
 
-![圆形图片效果图](https://github.com/huangziye/BottomNavigationBar/blob/master/screenshot/BottomNavigationBar.gif)
+![圆形图片效果图](./screenshot/BottomNavigationBar.gif)
 
 
 # Usage

@@ -7,7 +7,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.android.tools.build:gradle:3.3.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // 注意，添加的 JitPack 版本是根据 Gradle版本而定的，具体查看文档 https://github.com/dcendents/android-maven-gradle-plugin
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'

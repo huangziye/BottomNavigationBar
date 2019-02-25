@@ -841,14 +841,14 @@ open class BadgeView : View, Badge {
             if (targetView == null) {
                 super.onMeasure(widthMeasureSpec, heightMeasureSpec)
             } else {
-                targetView!!.measure(widthMeasureSpec, heightMeasureSpec)
+                targetView.measure(widthMeasureSpec, heightMeasureSpec)
                 if (badgeView != null) {
                     badgeView!!.measure(
-                        View.MeasureSpec.makeMeasureSpec(targetView!!.measuredWidth, View.MeasureSpec.EXACTLY),
-                        View.MeasureSpec.makeMeasureSpec(targetView!!.measuredHeight, View.MeasureSpec.EXACTLY)
+                        View.MeasureSpec.makeMeasureSpec(targetView.measuredWidth, View.MeasureSpec.EXACTLY),
+                        View.MeasureSpec.makeMeasureSpec(targetView.measuredHeight, View.MeasureSpec.EXACTLY)
                     )
                 }
-                setMeasuredDimension(targetView!!.measuredWidth, targetView!!.measuredHeight)
+                setMeasuredDimension(targetView.measuredWidth, targetView.measuredHeight)
             }
         }
     }
