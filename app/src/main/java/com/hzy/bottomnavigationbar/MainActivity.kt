@@ -1,12 +1,9 @@
 package com.hzy.bottomnavigationbar
 
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.StateListDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -60,8 +57,8 @@ class MainActivity : AppCompatActivity() {
             .itemBackground(getDrawable(android.R.color.white))
 //            .itemIconTint(getColorStateList(R.color.menu_item_selector))
 //            .itemTextColor(getColorStateList(R.color.menu_item_selector))
-            .setMenuItemTextColor(
-                ContextCompat.getColor(this, R.color.colorAccent),
+            .setMenuItemTextWithIconColor(
+                ContextCompat.getColor(this, R.color.navigation_item_selected_color),
                 ContextCompat.getColor(this, android.R.color.black)
             )
             .addFragment(WechatFragment())
