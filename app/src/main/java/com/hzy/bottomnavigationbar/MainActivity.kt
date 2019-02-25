@@ -29,11 +29,11 @@ class MainActivity : AppCompatActivity() {
         val bar = BottomNavigationBar.Companion.Builder().with(this)
             .bottomNavigationView(bottom_navigation)
             .viewpager(viewpager)
-            .addMenuItem(R.id.action_wechat, getString(R.string.wechat), R.mipmap.ic_wechat)
-            .addMenuItem(R.id.action_contact, getString(R.string.contact), R.mipmap.ic_contact)
-            .addMenuItem(R.id.action_find, getString(R.string.find), R.mipmap.ic_find)
-            .addMenuItem(R.id.action_me, getString(R.string.me), R.mipmap.ic_me)
-           /* .addMenuItem(
+//            .addMenuItem(R.id.action_wechat, getString(R.string.wechat), R.mipmap.ic_wechat)
+//            .addMenuItem(R.id.action_contact, getString(R.string.contact), R.mipmap.ic_contact)
+//            .addMenuItem(R.id.action_find, getString(R.string.find), R.mipmap.ic_find)
+//            .addMenuItem(R.id.action_me, getString(R.string.me), R.mipmap.ic_me)
+            .addMenuItem(
                 R.id.action_wechat,
                 getString(R.string.wechat),
                 R.mipmap.ic_wechat, R.mipmap.ic_contact
@@ -52,13 +52,13 @@ class MainActivity : AppCompatActivity() {
                 R.id.action_me,
                 getString(R.string.me),
                 R.mipmap.ic_me, R.mipmap.ic_wechat
-            )*/
+            )
             .notCanScroll(false)
             .itemBackground(getDrawable(android.R.color.white))
 //            .itemIconTint(getColorStateList(R.color.menu_item_selector))
 //            .itemTextColor(getColorStateList(R.color.menu_item_selector))
-            .setMenuItemTextWithIconColor(
-                ContextCompat.getColor(this, R.color.navigation_item_selected_color),
+            .setMenuItemTextColor(
+                ContextCompat.getColor(this, R.color.colorAccent),
                 ContextCompat.getColor(this, android.R.color.black)
             )
             .addFragment(WechatFragment())

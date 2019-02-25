@@ -141,6 +141,8 @@ open class BottomNavigationBar {
                  */
                 var menuItem = mBottomNavigationView.menu.add(0, itemId, mBottomNavigationView.menu.size(), title)
                 menuItem.icon = createItemIconDrawable(itemCheckedIcon, itemNormalIcon)
+                //此处要设置为null，否则会显示默认颜色
+                mBottomNavigationView.itemIconTintList = null
                 return this
             }
 
