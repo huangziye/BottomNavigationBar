@@ -79,6 +79,10 @@ BottomNavigationBar.Companion.Builder().with(this)
     .addMenuItem(R.id.action_find, getString(R.string.find), R.mipmap.ic_find)
     .addMenuItem(R.id.action_me, getString(R.string.me), R.mipmap.ic_me)
     .notCanScroll(false)
+    .setMenuItemTextColor(
+        ContextCompat.getColor(this, R.color.navigation_item_selected_color),
+        ContextCompat.getColor(this, android.R.color.black)
+    )
     .addFragment(WechatFragment())
     .addFragment(ContactFragment())
     .addFragment(FindFragment())

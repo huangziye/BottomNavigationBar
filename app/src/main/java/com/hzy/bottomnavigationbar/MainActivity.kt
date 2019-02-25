@@ -1,11 +1,15 @@
 package com.hzy.bottomnavigationbar
 
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.StateListDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.hzy.bottomnavigationbar.fragment.ContactFragment
@@ -32,10 +36,34 @@ class MainActivity : AppCompatActivity() {
             .addMenuItem(R.id.action_contact, getString(R.string.contact), R.mipmap.ic_contact)
             .addMenuItem(R.id.action_find, getString(R.string.find), R.mipmap.ic_find)
             .addMenuItem(R.id.action_me, getString(R.string.me), R.mipmap.ic_me)
+            /*.addMenuItem(
+                R.id.action_wechat,
+                getString(R.string.wechat),
+                R.mipmap.ic_wechat, R.mipmap.ic_contact
+            )
+            .addMenuItem(
+                R.id.action_contact,
+                getString(R.string.contact),
+                R.mipmap.ic_contact, R.mipmap.ic_find
+            )
+            .addMenuItem(
+                R.id.action_find,
+                getString(R.string.find),
+                R.mipmap.ic_find, R.mipmap.ic_me
+            )
+            .addMenuItem(
+                R.id.action_me,
+                getString(R.string.me),
+                R.mipmap.ic_me, R.mipmap.ic_wechat
+            )*/
             .notCanScroll(false)
             .itemBackground(getDrawable(android.R.color.white))
-            .itemIconTint(getColorStateList(R.color.menu_item_selector))
-            .itemTextColor(getColorStateList(R.color.menu_item_selector))
+//            .itemIconTint(getColorStateList(R.color.menu_item_selector))
+//            .itemTextColor(getColorStateList(R.color.menu_item_selector))
+            .setMenuItemTextColor(
+                ContextCompat.getColor(this, R.color.colorAccent),
+                ContextCompat.getColor(this, android.R.color.black)
+            )
             .addFragment(WechatFragment())
             .addFragment(ContactFragment())
             .addFragment(FindFragment())
@@ -55,4 +83,5 @@ class MainActivity : AppCompatActivity() {
                 }
             })
     }
+
 }

@@ -3,9 +3,12 @@ package com.hzy.navigation
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.StateListDrawable
+import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -112,6 +115,44 @@ open class BottomNavigationBar {
                 return this
             }
 
+            fun addMenuItem(@IdRes itemId: Int, title: String, itemIconDrawable: Drawable): Builder {
+                /**
+                 * 第一个int类型的group ID参数，代表的是组概念，你可以将几个菜单项归为一组，以便更好的以组的方式管理你的菜单按钮。
+                 * 第二个int类型的item ID参数，代表的是项目编号。这个参数非常重要，一个item ID对应一个menu中的选项。在后面使用菜单的时候，就靠这个item ID来判断你使用的是哪个选项。
+                 * 第三个int类型的order ID参数，代表的是菜单项的显示顺序。默认是0，表示菜单的显示顺序就是按照add的显示顺序来显示。
+                 * 第四个String类型的title参数，表示选项中显示的文字。
+                 */
+                var menuItem = mBottomNavigationView.menu.add(0, itemId, mBottomNavigationView.menu.size(), title)
+                menuItem.icon = itemIconDrawable
+                return this
+            }
+
+            /**
+             *
+             * @param itemCheckedIcon 选中的图片
+             * @param itemNormalIcon 未选中的图片
+             */
+            fun addMenuItem(@IdRes itemId: Int, title: String, @DrawableRes itemCheckedIcon: Int, @DrawableRes itemNormalIcon: Int): Builder {
+                /**
+                 * 第一个int类型的group ID参数，代表的是组概念，你可以将几个菜单项归为一组，以便更好的以组的方式管理你的菜单按钮。
+                 * 第二个int类型的item ID参数，代表的是项目编号。这个参数非常重要，一个item ID对应一个menu中的选项。在后面使用菜单的时候，就靠这个item ID来判断你使用的是哪个选项。
+                 * 第三个int类型的order ID参数，代表的是菜单项的显示顺序。默认是0，表示菜单的显示顺序就是按照add的显示顺序来显示。
+                 * 第四个String类型的title参数，表示选项中显示的文字。
+                 */
+                var menuItem = mBottomNavigationView.menu.add(0, itemId, mBottomNavigationView.menu.size(), title)
+                menuItem.icon = createItemIconDrawable(itemCheckedIcon, itemNormalIcon)
+                return this
+            }
+
+            /**
+             * 设置menuItem选中时文字及图片的颜色
+             */
+            fun setMenuItemTextColor(@ColorInt checkTextColor: Int, @ColorInt normalTextColor: Int): Builder {
+                mBottomNavigationView.itemTextColor = createColorStateList(checkTextColor, normalTextColor)
+                mBottomNavigationView.itemIconTintList = createColorStateList(checkTextColor, normalTextColor)
+                return this
+            }
+
             fun build(): BottomNavigationBar {
                 init()
                 return BottomNavigationBar()
@@ -139,6 +180,27 @@ open class BottomNavigationBar {
                 //设置ViewPager是否可以滑动 true 不可以 false 可以
                 mViewPager.setOnTouchListener { v, event -> mNotCanScroll }
                 mViewPager.adapter = mAdapter
+            }
+
+            /**
+             * 创建ColorStateList
+             */
+            private fun createColorStateList(@ColorInt checkedColor: Int, @ColorInt normalColor: Int): ColorStateList {
+                val colors = intArrayOf(checkedColor, normalColor)
+                val states = arrayOfNulls<IntArray>(2)
+                states[0] = intArrayOf(android.R.attr.state_checked)
+                states[1] = intArrayOf(-android.R.attr.state_checked)
+                return ColorStateList(states, colors)
+            }
+
+            /**
+             * 创建选中及未选中图片Drawable selector
+             */
+            private fun createItemIconDrawable(@DrawableRes checkedIcon: Int, @DrawableRes normalIcon: Int): Drawable {
+                val sld = StateListDrawable()
+                sld.addState(intArrayOf(android.R.attr.state_checked), ContextCompat.getDrawable(mContext, checkedIcon))
+                sld.addState(intArrayOf(-android.R.attr.state_checked), ContextCompat.getDrawable(mContext, normalIcon))
+                return sld
             }
         }
     }
