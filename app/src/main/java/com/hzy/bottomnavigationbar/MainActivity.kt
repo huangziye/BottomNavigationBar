@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             .addMenuItem(R.id.action_contact, getString(R.string.contact), R.mipmap.ic_contact)
             .addMenuItem(R.id.action_find, getString(R.string.find), R.mipmap.ic_find)
             .addMenuItem(R.id.action_me, getString(R.string.me), R.mipmap.ic_me)
-            /*.addMenuItem(
+           /* .addMenuItem(
                 R.id.action_wechat,
                 getString(R.string.wechat),
                 R.mipmap.ic_wechat, R.mipmap.ic_contact

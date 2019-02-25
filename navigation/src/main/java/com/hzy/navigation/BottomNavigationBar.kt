@@ -132,7 +132,7 @@ open class BottomNavigationBar {
              * @param itemCheckedIcon 选中的图片
              * @param itemNormalIcon 未选中的图片
              */
-            fun addMenuItem(@IdRes itemId: Int, title: String, @DrawableRes itemCheckedIcon: Int, @DrawableRes itemNormalIcon: Int): Builder {
+            fun addMenuItem(@IdRes itemId: Int, title: String, itemCheckedIcon: Int, itemNormalIcon: Int): Builder {
                 /**
                  * 第一个int类型的group ID参数，代表的是组概念，你可以将几个菜单项归为一组，以便更好的以组的方式管理你的菜单按钮。
                  * 第二个int类型的item ID参数，代表的是项目编号。这个参数非常重要，一个item ID对应一个menu中的选项。在后面使用菜单的时候，就靠这个item ID来判断你使用的是哪个选项。
@@ -196,7 +196,7 @@ open class BottomNavigationBar {
             /**
              * 创建选中及未选中图片Drawable selector
              */
-            private fun createItemIconDrawable(@DrawableRes checkedIcon: Int, @DrawableRes normalIcon: Int): Drawable {
+            private fun createItemIconDrawable(checkedIcon: Int, normalIcon: Int): Drawable {
                 val sld = StateListDrawable()
                 sld.addState(intArrayOf(android.R.attr.state_checked), ContextCompat.getDrawable(mContext, checkedIcon))
                 sld.addState(intArrayOf(-android.R.attr.state_checked), ContextCompat.getDrawable(mContext, normalIcon))
