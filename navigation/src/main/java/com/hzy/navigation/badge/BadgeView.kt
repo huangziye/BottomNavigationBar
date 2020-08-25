@@ -477,7 +477,10 @@ open class BadgeView : View, Badge {
             initPaints()
             val badgeRadius = getBadgeCircleRadius()
             val startCircleRadius =
-                mDefalutRadius * (1 - MathUtil.getPointDistance(mRowBadgeCenter, mDragCenter) / mFinalDragDistance)
+                mDefalutRadius * (1 - MathUtil.getPointDistance(
+                    mRowBadgeCenter,
+                    mDragCenter
+                ) / mFinalDragDistance)
             if (mDraggable && mDragging) {
                 mDragQuadrant = MathUtil.getQuadrant(mDragCenter, mRowBadgeCenter)
                 showShadowImpl(mShowShadow)
@@ -527,9 +530,19 @@ open class BadgeView : View, Badge {
         mControlPoint.x = (mRowBadgeCenter.x + mDragCenter.x) / 2.0f
         mControlPoint.y = (mRowBadgeCenter.y + mDragCenter.y) / 2.0f
         mDragPath.moveTo(mInnerTangentPoints[2].x, mInnerTangentPoints[2].y)
-        mDragPath.quadTo(mControlPoint.x, mControlPoint.y, mInnerTangentPoints[0].x, mInnerTangentPoints[0].y)
+        mDragPath.quadTo(
+            mControlPoint.x,
+            mControlPoint.y,
+            mInnerTangentPoints[0].x,
+            mInnerTangentPoints[0].y
+        )
         mDragPath.lineTo(mInnerTangentPoints[1].x, mInnerTangentPoints[1].y)
-        mDragPath.quadTo(mControlPoint.x, mControlPoint.y, mInnerTangentPoints[3].x, mInnerTangentPoints[3].y)
+        mDragPath.quadTo(
+            mControlPoint.x,
+            mControlPoint.y,
+            mInnerTangentPoints[3].x,
+            mInnerTangentPoints[3].y
+        )
         mDragPath.lineTo(mInnerTangentPoints[2].x, mInnerTangentPoints[2].y)
         mDragPath.close()
         canvas.drawPath(mDragPath, mBadgeBackgroundPaint)
@@ -538,9 +551,19 @@ open class BadgeView : View, Badge {
         if (mColorBackgroundBorder != 0 && mBackgroundBorderWidth > 0) {
             mDragPath.reset()
             mDragPath.moveTo(mInnerTangentPoints[2].x, mInnerTangentPoints[2].y)
-            mDragPath.quadTo(mControlPoint.x, mControlPoint.y, mInnerTangentPoints[0].x, mInnerTangentPoints[0].y)
+            mDragPath.quadTo(
+                mControlPoint.x,
+                mControlPoint.y,
+                mInnerTangentPoints[0].x,
+                mInnerTangentPoints[0].y
+            )
             mDragPath.moveTo(mInnerTangentPoints[1].x, mInnerTangentPoints[1].y)
-            mDragPath.quadTo(mControlPoint.x, mControlPoint.y, mInnerTangentPoints[3].x, mInnerTangentPoints[3].y)
+            mDragPath.quadTo(
+                mControlPoint.x,
+                mControlPoint.y,
+                mInnerTangentPoints[3].x,
+                mInnerTangentPoints[3].y
+            )
             val startY: Float
             val startX: Float
             if (mDragQuadrant == 1 || mDragQuadrant == 2) {
@@ -594,22 +617,29 @@ open class BadgeView : View, Badge {
             }
         } else {
             mBadgeBackgroundRect.left = center.x - (mBadgeTextRect.width() / 2f + mBadgePadding)
-            mBadgeBackgroundRect.top = center.y - (mBadgeTextRect.height() / 2f + mBadgePadding * 0.5f)
+            mBadgeBackgroundRect.top =
+                center.y - (mBadgeTextRect.height() / 2f + mBadgePadding * 0.5f)
             mBadgeBackgroundRect.right = center.x + (mBadgeTextRect.width() / 2f + mBadgePadding)
-            mBadgeBackgroundRect.bottom = center.y + (mBadgeTextRect.height() / 2f + mBadgePadding * 0.5f)
+            mBadgeBackgroundRect.bottom =
+                center.y + (mBadgeTextRect.height() / 2f + mBadgePadding * 0.5f)
             radius = mBadgeBackgroundRect.height() / 2f
             if (mDrawableBackground != null) {
                 drawBadgeBackground(canvas)
             } else {
                 canvas.drawRoundRect(mBadgeBackgroundRect, radius, radius, mBadgeBackgroundPaint)
                 if (mColorBackgroundBorder != 0 && mBackgroundBorderWidth > 0) {
-                    canvas.drawRoundRect(mBadgeBackgroundRect, radius, radius, mBadgeBackgroundBorderPaint)
+                    canvas.drawRoundRect(
+                        mBadgeBackgroundRect,
+                        radius,
+                        radius,
+                        mBadgeBackgroundBorderPaint
+                    )
                 }
             }
         }
         if (!mBadgeText!!.isEmpty()) {
             canvas.drawText(
-                mBadgeText, center.x,
+                mBadgeText!!, center.x,
                 (mBadgeBackgroundRect.bottom + mBadgeBackgroundRect.top
                         - mBadgeTextFontMetrics.bottom - mBadgeTextFontMetrics.top) / 2f,
                 mBadgeTextPaint
@@ -639,7 +669,7 @@ open class BadgeView : View, Badge {
         mDrawableBackground!!.draw(canvas)
         if (mDrawableBackgroundClip) {
             mBadgeBackgroundPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN)
-            canvas.drawBitmap(mBitmapClip, left.toFloat(), top.toFloat(), mBadgeBackgroundPaint)
+            canvas.drawBitmap(mBitmapClip!!, left.toFloat(), top.toFloat(), mBadgeBackgroundPaint)
             canvas.restore()
             mBadgeBackgroundPaint.xfermode = null
             if (mBadgeText!!.isEmpty() || mBadgeText!!.length == 1) {
@@ -675,7 +705,7 @@ open class BadgeView : View, Badge {
                 radius.toInt() * 2, radius.toInt() * 2,
                 Bitmap.Config.ARGB_4444
             )
-            val srcCanvas = Canvas(mBitmapClip)
+            val srcCanvas = Canvas(mBitmapClip!!)
             srcCanvas.drawCircle(
                 srcCanvas.width / 2f, srcCanvas.height / 2f,
                 srcCanvas.width / 2f, mBadgeBackgroundPaint
@@ -685,11 +715,16 @@ open class BadgeView : View, Badge {
                 (mBadgeTextRect.width() + mBadgePadding * 2).toInt(),
                 (mBadgeTextRect.height() + mBadgePadding).toInt(), Bitmap.Config.ARGB_4444
             )
-            val srcCanvas = Canvas(mBitmapClip)
+            val srcCanvas = Canvas(mBitmapClip!!)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 srcCanvas.drawRoundRect(
-                    0f, 0f, srcCanvas.width.toFloat(), srcCanvas.height.toFloat(), srcCanvas.height / 2f,
-                    srcCanvas.height / 2f, mBadgeBackgroundPaint
+                    0f,
+                    0f,
+                    srcCanvas.width.toFloat(),
+                    srcCanvas.height.toFloat(),
+                    srcCanvas.height / 2f,
+                    srcCanvas.height / 2f,
+                    mBadgeBackgroundPaint
                 )
             } else {
                 srcCanvas.drawRoundRect(
@@ -725,7 +760,8 @@ open class BadgeView : View, Badge {
             }
             Gravity.START or Gravity.BOTTOM -> {
                 mBadgeCenter.x = mGravityOffsetX + mBadgePadding + rectWidth / 2f
-                mBadgeCenter.y = mHeight - (mGravityOffsetY + mBadgePadding + mBadgeTextRect.height() / 2f)
+                mBadgeCenter.y =
+                    mHeight - (mGravityOffsetY + mBadgePadding + mBadgeTextRect.height() / 2f)
             }
             Gravity.END or Gravity.TOP -> {
                 mBadgeCenter.x = mWidth - (mGravityOffsetX + mBadgePadding + rectWidth / 2f)
@@ -733,7 +769,8 @@ open class BadgeView : View, Badge {
             }
             Gravity.END or Gravity.BOTTOM -> {
                 mBadgeCenter.x = mWidth - (mGravityOffsetX + mBadgePadding + rectWidth / 2f)
-                mBadgeCenter.y = mHeight - (mGravityOffsetY + mBadgePadding + mBadgeTextRect.height() / 2f)
+                mBadgeCenter.y =
+                    mHeight - (mGravityOffsetY + mBadgePadding + mBadgeTextRect.height() / 2f)
             }
             Gravity.CENTER -> {
                 mBadgeCenter.x = mWidth / 2f
@@ -745,7 +782,8 @@ open class BadgeView : View, Badge {
             }
             Gravity.CENTER or Gravity.BOTTOM -> {
                 mBadgeCenter.x = mWidth / 2f
-                mBadgeCenter.y = mHeight - (mGravityOffsetY + mBadgePadding + mBadgeTextRect.height() / 2f)
+                mBadgeCenter.y =
+                    mHeight - (mGravityOffsetY + mBadgePadding + mBadgeTextRect.height() / 2f)
             }
             Gravity.CENTER or Gravity.START -> {
                 mBadgeCenter.x = mGravityOffsetX + mBadgePadding + rectWidth / 2f
@@ -844,8 +882,14 @@ open class BadgeView : View, Badge {
                 targetView.measure(widthMeasureSpec, heightMeasureSpec)
                 if (badgeView != null) {
                     badgeView!!.measure(
-                        View.MeasureSpec.makeMeasureSpec(targetView.measuredWidth, View.MeasureSpec.EXACTLY),
-                        View.MeasureSpec.makeMeasureSpec(targetView.measuredHeight, View.MeasureSpec.EXACTLY)
+                        View.MeasureSpec.makeMeasureSpec(
+                            targetView.measuredWidth,
+                            View.MeasureSpec.EXACTLY
+                        ),
+                        View.MeasureSpec.makeMeasureSpec(
+                            targetView.measuredHeight,
+                            View.MeasureSpec.EXACTLY
+                        )
                     )
                 }
                 setMeasuredDimension(targetView.measuredWidth, targetView.measuredHeight)

@@ -26,6 +26,7 @@ open class BottomNavigationBar {
             private lateinit var mBottomNavigationView: BottomNavigationView
             private lateinit var mViewPager: ViewPager
             private lateinit var mAdapter: ViewPagerAdapter
+
             /**
              * 默认设置显示文字
              *
@@ -36,19 +37,27 @@ open class BottomNavigationBar {
              * 2 LABEL_VISIBILITY_UNLABELED(所有都不显示文字)
              */
             private var mLabelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED
+
             /**
              * 默认可以滑动
              */
             private var mNotCanScroll = false
+
             /**
              * 预加载页面的个数
              */
             private var mPageLimit = 0
 
+            /**
+             * 默认选中的item
+             */
+            private var mSelectedIndex = 0
+
             fun with(context: Context): Builder {
                 mContext = context
                 if (mContext is AppCompatActivity) {
-                    mAdapter = ViewPagerAdapter((mContext as AppCompatActivity).supportFragmentManager)
+                    mAdapter =
+                        ViewPagerAdapter((mContext as AppCompatActivity).supportFragmentManager)
                 }
                 return this
             }
@@ -78,7 +87,7 @@ open class BottomNavigationBar {
                 return this
             }
 
-            fun itemBackground(@DrawableRes background: Drawable): Builder {
+            fun itemBackground(background: Drawable): Builder {
                 mBottomNavigationView.itemBackground = background
                 return this
             }
@@ -98,31 +107,59 @@ open class BottomNavigationBar {
                 return this
             }
 
+            /**
+             * 设置选中的item，下标是从0开始
+             */
+            fun setSelectedItem(position: Int): Builder {
+                mSelectedIndex = position
+                mBottomNavigationView.menu.getItem(position).isChecked = true
+                mViewPager.currentItem = position
+                return this
+            }
+
             fun addFragment(fragment: Fragment): Builder {
                 mAdapter.addFragment(fragment)
                 return this
             }
 
-            fun addMenuItem(@IdRes itemId: Int, title: String, @DrawableRes itemIcon: Int): Builder {
+            fun addMenuItem(
+                @IdRes itemId: Int,
+                title: String,
+                @DrawableRes itemIcon: Int
+            ): Builder {
                 /**
                  * 第一个int类型的group ID参数，代表的是组概念，你可以将几个菜单项归为一组，以便更好的以组的方式管理你的菜单按钮。
                  * 第二个int类型的item ID参数，代表的是项目编号。这个参数非常重要，一个item ID对应一个menu中的选项。在后面使用菜单的时候，就靠这个item ID来判断你使用的是哪个选项。
                  * 第三个int类型的order ID参数，代表的是菜单项的显示顺序。默认是0，表示菜单的显示顺序就是按照add的显示顺序来显示。
                  * 第四个String类型的title参数，表示选项中显示的文字。
                  */
-                var menuItem = mBottomNavigationView.menu.add(0, itemId, mBottomNavigationView.menu.size(), title)
+                var menuItem = mBottomNavigationView.menu.add(
+                    0,
+                    itemId,
+                    mBottomNavigationView.menu.size(),
+                    title
+                )
                 menuItem.setIcon(itemIcon)
                 return this
             }
 
-            fun addMenuItem(@IdRes itemId: Int, title: String, itemIconDrawable: Drawable): Builder {
+            fun addMenuItem(
+                @IdRes itemId: Int,
+                title: String,
+                itemIconDrawable: Drawable
+            ): Builder {
                 /**
                  * 第一个int类型的group ID参数，代表的是组概念，你可以将几个菜单项归为一组，以便更好的以组的方式管理你的菜单按钮。
                  * 第二个int类型的item ID参数，代表的是项目编号。这个参数非常重要，一个item ID对应一个menu中的选项。在后面使用菜单的时候，就靠这个item ID来判断你使用的是哪个选项。
                  * 第三个int类型的order ID参数，代表的是菜单项的显示顺序。默认是0，表示菜单的显示顺序就是按照add的显示顺序来显示。
                  * 第四个String类型的title参数，表示选项中显示的文字。
                  */
-                var menuItem = mBottomNavigationView.menu.add(0, itemId, mBottomNavigationView.menu.size(), title)
+                var menuItem = mBottomNavigationView.menu.add(
+                    0,
+                    itemId,
+                    mBottomNavigationView.menu.size(),
+                    title
+                )
                 menuItem.icon = itemIconDrawable
                 return this
             }
@@ -132,14 +169,24 @@ open class BottomNavigationBar {
              * @param itemCheckedIcon 选中的图片
              * @param itemNormalIcon 未选中的图片
              */
-            fun addMenuItem(@IdRes itemId: Int, title: String, @DrawableRes itemCheckedIcon: Int, @DrawableRes itemNormalIcon: Int): Builder {
+            fun addMenuItem(
+                @IdRes itemId: Int,
+                title: String,
+                @DrawableRes itemCheckedIcon: Int,
+                @DrawableRes itemNormalIcon: Int
+            ): Builder {
                 /**
                  * 第一个int类型的group ID参数，代表的是组概念，你可以将几个菜单项归为一组，以便更好的以组的方式管理你的菜单按钮。
                  * 第二个int类型的item ID参数，代表的是项目编号。这个参数非常重要，一个item ID对应一个menu中的选项。在后面使用菜单的时候，就靠这个item ID来判断你使用的是哪个选项。
                  * 第三个int类型的order ID参数，代表的是菜单项的显示顺序。默认是0，表示菜单的显示顺序就是按照add的显示顺序来显示。
                  * 第四个String类型的title参数，表示选项中显示的文字。
                  */
-                var menuItem = mBottomNavigationView.menu.add(0, itemId, mBottomNavigationView.menu.size(), title)
+                var menuItem = mBottomNavigationView.menu.add(
+                    0,
+                    itemId,
+                    mBottomNavigationView.menu.size(),
+                    title
+                )
                 menuItem.icon = createItemIconDrawable(itemCheckedIcon, itemNormalIcon)
                 //此处要设置为null，否则会显示默认颜色
                 mBottomNavigationView.itemIconTintList = null
@@ -149,35 +196,49 @@ open class BottomNavigationBar {
             /**
              * 设置menuItem选中时文字及图片的颜色
              */
-            fun setMenuItemTextWithIconColor(@ColorInt checkTextColor: Int, @ColorInt normalTextColor: Int): Builder {
-                mBottomNavigationView.itemTextColor = createColorStateList(checkTextColor, normalTextColor)
-                mBottomNavigationView.itemIconTintList = createColorStateList(checkTextColor, normalTextColor)
+            fun setMenuItemTextWithIconColor(
+                @ColorInt checkTextColor: Int,
+                @ColorInt normalTextColor: Int
+            ): Builder {
+                mBottomNavigationView.itemTextColor =
+                    createColorStateList(checkTextColor, normalTextColor)
+                mBottomNavigationView.itemIconTintList =
+                    createColorStateList(checkTextColor, normalTextColor)
                 return this
             }
 
             /**
              * 设置menuItem 文字颜色
              */
-            fun setMenuItemTextColor(@ColorInt checkTextColor: Int, @ColorInt normalTextColor: Int): Builder {
-                mBottomNavigationView.itemTextColor = createColorStateList(checkTextColor, normalTextColor)
+            fun setMenuItemTextColor(
+                @ColorInt checkTextColor: Int,
+                @ColorInt normalTextColor: Int
+            ): Builder {
+                mBottomNavigationView.itemTextColor =
+                    createColorStateList(checkTextColor, normalTextColor)
                 return this
             }
 
             /**
              * 设置menuItem 图片颜色
              */
-            fun setMenuItemIconColor(@ColorInt checkTextColor: Int, @ColorInt normalTextColor: Int): Builder {
-                mBottomNavigationView.itemIconTintList = createColorStateList(checkTextColor, normalTextColor)
+            fun setMenuItemIconColor(
+                @ColorInt checkTextColor: Int,
+                @ColorInt normalTextColor: Int
+            ): Builder {
+                mBottomNavigationView.itemIconTintList =
+                    createColorStateList(checkTextColor, normalTextColor)
                 return this
             }
 
-            fun build(): BottomNavigationBar {
+            fun build(): Builder {
                 init()
-                return BottomNavigationBar()
+//                return BottomNavigationBar()
+                return this
             }
 
             private fun init() {
-                mBottomNavigationView.menu.getItem(0).isChecked = true
+                mBottomNavigationView.menu.getItem(mSelectedIndex).isChecked = true
                 mBottomNavigationView.labelVisibilityMode = mLabelVisibilityMode
                 mBottomNavigationView.setOnNavigationItemSelectedListener { item ->
                     mViewPager.currentItem = item.order
@@ -187,7 +248,11 @@ open class BottomNavigationBar {
                     override fun onPageScrollStateChanged(state: Int) {
                     }
 
-                    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                    override fun onPageScrolled(
+                        position: Int,
+                        positionOffset: Float,
+                        positionOffsetPixels: Int
+                    ) {
                     }
 
                     override fun onPageSelected(position: Int) {
@@ -198,12 +263,16 @@ open class BottomNavigationBar {
                 //设置ViewPager是否可以滑动 true 不可以 false 可以
                 mViewPager.setOnTouchListener { v, event -> mNotCanScroll }
                 mViewPager.adapter = mAdapter
+                mViewPager.currentItem = mSelectedIndex
             }
 
             /**
              * 创建ColorStateList
              */
-            private fun createColorStateList(@ColorInt checkedColor: Int, @ColorInt normalColor: Int): ColorStateList {
+            private fun createColorStateList(
+                @ColorInt checkedColor: Int,
+                @ColorInt normalColor: Int
+            ): ColorStateList {
                 val colors = intArrayOf(checkedColor, normalColor)
                 val states = arrayOfNulls<IntArray>(2)
                 states[0] = intArrayOf(android.R.attr.state_checked)
@@ -214,10 +283,19 @@ open class BottomNavigationBar {
             /**
              * 创建选中及未选中图片Drawable selector
              */
-            private fun createItemIconDrawable(@DrawableRes checkedIcon: Int, @DrawableRes normalIcon: Int): Drawable {
+            private fun createItemIconDrawable(
+                @DrawableRes checkedIcon: Int,
+                @DrawableRes normalIcon: Int
+            ): Drawable {
                 val sld = StateListDrawable()
-                sld.addState(intArrayOf(android.R.attr.state_checked), ContextCompat.getDrawable(mContext, checkedIcon))
-                sld.addState(intArrayOf(-android.R.attr.state_checked), ContextCompat.getDrawable(mContext, normalIcon))
+                sld.addState(
+                    intArrayOf(android.R.attr.state_checked),
+                    ContextCompat.getDrawable(mContext, checkedIcon)
+                )
+                sld.addState(
+                    intArrayOf(-android.R.attr.state_checked),
+                    ContextCompat.getDrawable(mContext, normalIcon)
+                )
                 return sld
             }
         }

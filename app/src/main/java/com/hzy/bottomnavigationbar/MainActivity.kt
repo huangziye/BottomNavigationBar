@@ -2,6 +2,7 @@ package com.hzy.bottomnavigationbar
 
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -54,17 +55,18 @@ class MainActivity : AppCompatActivity() {
                 R.mipmap.ic_me, R.mipmap.ic_wechat
             )
             .notCanScroll(false)
-            .itemBackground(getDrawable(android.R.color.white))
+            .itemBackground(ContextCompat.getDrawable(this@MainActivity, android.R.color.white)!!)
 //            .itemIconTint(getColorStateList(R.color.menu_item_selector))
 //            .itemTextColor(getColorStateList(R.color.menu_item_selector))
             .setMenuItemTextColor(
-                ContextCompat.getColor(this, R.color.colorAccent),
+                ContextCompat.getColor(this, R.color.navigation_item_selected_color),
                 ContextCompat.getColor(this, android.R.color.black)
             )
             .addFragment(WechatFragment())
             .addFragment(ContactFragment())
             .addFragment(FindFragment())
             .addFragment(MeFragment())
+            .setSelectedItem(3)
             .build()
 
 
@@ -73,12 +75,19 @@ class MainActivity : AppCompatActivity() {
 
         BadgeView(this).bindTargetView(itemView).setBadgeCount(120)
             .setOnDragStateChangedListener(object : Badge.OnDragStateChangedListener {
-                override fun onDragStateChanged(dragState: DragState, badge: Badge, targetView: View) {
+                override fun onDragStateChanged(
+                    dragState: DragState,
+                    badge: Badge,
+                    targetView: View
+                ) {
                     if (dragState == DragState.STATE_SUCCEED) {
                         Toast.makeText(this@MainActivity, "success", Toast.LENGTH_SHORT).show()
                     }
                 }
             })
+
+
+        Handler().postDelayed(Runnable { bar.setSelectedItem(1) }, 10000)
     }
 
 }
