@@ -71,7 +71,7 @@ dependencies {
 
 
 ```Kotlin
-BottomNavigationBar.Companion.Builder().with(this)
+val builder = BottomNavigationBar.Companion.Builder().with(this)
     .bottomNavigationView(bottom_navigation)
     .viewpager(viewpager)
     .addMenuItem(R.id.action_wechat, getString(R.string.wechat), R.mipmap.ic_wechat)
@@ -87,7 +87,11 @@ BottomNavigationBar.Companion.Builder().with(this)
     .addFragment(ContactFragment())
     .addFragment(FindFragment())
     .addFragment(MeFragment())
+    .setSelectedItem(0) // 默认选中的item
     .build()
+
+// 动态设置选中的item
+builder.setSelectedItem(2)
 ```
 
 设置未读消息

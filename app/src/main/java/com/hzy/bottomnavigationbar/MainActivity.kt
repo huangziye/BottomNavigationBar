@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val bar = BottomNavigationBar.Companion.Builder().with(this)
+        val builder = BottomNavigationBar.Companion.Builder().with(this)
             .bottomNavigationView(bottom_navigation)
             .viewpager(viewpager)
 //            .addMenuItem(R.id.action_wechat, getString(R.string.wechat), R.mipmap.ic_wechat)
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
             })
 
 
-        Handler().postDelayed(Runnable { bar.setSelectedItem(1) }, 10000)
+        Handler().postDelayed(Runnable { builder.setSelectedItem(1) }, 10000)
     }
 
 }
