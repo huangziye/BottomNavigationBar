@@ -5,8 +5,6 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 30
 
-
-
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 30
@@ -23,12 +21,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildToolsVersion '30.0.2'
 
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.0"
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.10'
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    api 'com.google.android.material:material:1.2.0'
+    api 'com.google.android.material:material:1.2.1'
 }

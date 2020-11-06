@@ -20,6 +20,7 @@ import com.hzy.navigation.badge.BadgeView
 import com.hzy.navigation.badge.DragState
 import kotlinx.android.synthetic.main.activity_main.*
 
+
 class MainActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -54,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                 getString(R.string.me),
                 R.mipmap.ic_me, R.mipmap.ic_wechat
             )
-            .notCanScroll(false)
+            .notCanScroll(true) // 是否可以不滚动 true 不滚动 false 滚动
             .itemBackground(ContextCompat.getDrawable(this@MainActivity, android.R.color.white)!!)
 //            .itemIconTint(getColorStateList(R.color.menu_item_selector))
 //            .itemTextColor(getColorStateList(R.color.menu_item_selector))
