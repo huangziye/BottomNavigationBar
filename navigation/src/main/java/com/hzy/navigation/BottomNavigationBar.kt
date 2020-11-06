@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
-import com.hzy.navigation.util.ViewPagerUtil
 
 /**
  * Created by ziye_huang on 2018/12/25.
@@ -114,9 +113,6 @@ open class BottomNavigationBar {
             fun setSelectedItem(position: Int): Builder {
                 mSelectedIndex = position
                 mBottomNavigationView.menu.getItem(position).isChecked = true
-                val scroller = FixedSpeedScroller(mContext)
-                scroller.setCanScroll(!mNotCanScroll)
-                ViewPagerUtil.setViewPagerScrollSpeed(mViewPager, !mNotCanScroll)
                 mViewPager.currentItem = position
                 return this
             }
